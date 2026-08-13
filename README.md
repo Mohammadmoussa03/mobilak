@@ -20,7 +20,7 @@ export const socialConfig = {
     tiktok: 'https://tiktok.com/@mobilak',
     whatsapp: 'https://wa.me/961XXXXXXXXX',
   },
-  // ...handles, footnote, and the QR card live here too
+  // ...handles and footnote live here too
 }
 ```
 
@@ -29,7 +29,7 @@ export const socialConfig = {
 - **Logo** — replace `public/logo.png`. Anything in `public/` is served from the site root,
   so `public/logo.png` is referenced as `/logo.png`. If the file is missing, the page falls
   back to `brandName` set in the display face.
-- **Hiding things** — set `handles.*` or `footnote` to `""`, or `qr.enabled` to `false`.
+- **Hiding things** — set any `handles.*` entry or `footnote` to `""`.
 
 ## Run it
 
@@ -58,13 +58,14 @@ npx vercel --prod
 
 ## The QR code
 
-`qr.url` in the config is empty by default, which means the on-page QR card encodes
-**whatever address the page is currently served from**. The same code therefore works on
-localhost, on a preview deployment, and in production without any edit.
+The code lives on the sticker, card, or shop window — not on the page. Generate it from
+the production URL with any generator, e.g.:
 
-For the QR you actually print on a sticker, card, or shop window, generate it from the
-production URL — `https://my-social-qr.vercel.app` — using any generator, or set
-`qr.url` to that exact URL and screenshot the card. Two things worth doing:
+```bash
+npx qrcode "https://my-social-qr.vercel.app" -o qr.png -w 1024
+```
+
+Two things worth doing:
 
 - Use the **production** URL, not a preview URL. Preview URLs change on every deploy.
 - Test the printed code with a phone camera before printing a batch.
@@ -90,7 +91,6 @@ src/
   index.css                 Tailwind theme tokens
   components/
     SocialButton.tsx        the three cards
-    QrCard.tsx              the scan-to-connect card
 public/
   logo.png                  ← replace this
 ```

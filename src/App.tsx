@@ -4,9 +4,8 @@ import { MessageCircle } from 'lucide-react'
 import { socialConfig } from './config'
 import { Instagram, TikTok } from './icons'
 import { SocialButton } from './components/SocialButton'
-import { QrCard } from './components/QrCard'
 
-const { brandName, subtitle, logo, links, handles, footnote, qr } = socialConfig
+const { brandName, subtitle, logo, links, handles, footnote } = socialConfig
 
 export default function App() {
   const [logoBroken, setLogoBroken] = useState(false)
@@ -86,8 +85,6 @@ export default function App() {
             />
           </div>
         </nav>
-
-        {qr.enabled ? <QrCard url={qr.url} title={qr.title} caption={qr.caption} /> : null}
 
         {footnote ? (
           <p className="a-footer text-center font-display text-[10.5px] tracking-[0.18em] text-faint uppercase">
