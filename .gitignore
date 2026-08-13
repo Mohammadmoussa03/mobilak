@@ -1,0 +1,9 @@
+node_modules
+dist
+*.tsbuildinfo
+qr-ngrok.png
+dist-ssr
+.vercel
+*.local
+.DS_Store
+.vite

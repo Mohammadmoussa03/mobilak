@@ -1,0 +1,291 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Glancyr', 'Instrument Sans', ui-sans-serif, system-ui, sans-serif;
+
+  /* Ink */
+  --color-ink: #191817;
+  --color-ink-soft: #26251f;
+  --color-muted: #8c877e;
+  --color-muted-strong: #7d786f;
+  --color-faint: #a9a49a;
+  --color-chevron: #b3ada3;
+
+  /* Surface */
+  --color-canvas: #ebebec;
+  --color-chip: #f3f4f2;
+
+  /* Accent */
+  --color-accent: #5f8ec7;
+  --color-accent-light: #7ba7dc;
+  --color-accent-deep: #4b7cb5;
+
+  --ease-out-soft: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-sheen: cubic-bezier(0.5, 0, 0.4, 1);
+}
+
+/* ── Keyframes ────────────────────────────────────────────────────────────── */
+
+@keyframes markIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.955);
+    filter: blur(3px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
+  }
+}
+
+@keyframes riseIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes rowIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes ruleGrow {
+  from {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  to {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes floatY {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes nudgeX {
+  0%,
+  62%,
+  100% {
+    transform: translateX(0);
+    opacity: 0.8;
+  }
+  31% {
+    transform: translateX(3px);
+    opacity: 1;
+  }
+}
+
+@keyframes sheen {
+  0% {
+    transform: translateX(-130%) skewX(-18deg);
+  }
+  55%,
+  100% {
+    transform: translateX(240%) skewX(-18deg);
+  }
+}
+
+@keyframes cardSheen {
+  0% {
+    transform: translateX(-140%) skewX(-16deg);
+    opacity: 0;
+  }
+  12%,
+  48% {
+    opacity: 1;
+  }
+  62%,
+  100% {
+    transform: translateX(300%) skewX(-16deg);
+    opacity: 0;
+  }
+}
+
+@keyframes tileBreathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.045);
+  }
+}
+
+@keyframes haloDrift {
+  0%,
+  100% {
+    transform: translate3d(-2%, -1%, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(2%, 2%, 0) scale(1.06);
+  }
+}
+
+@keyframes qrPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(110, 155, 212, 0.32);
+  }
+  50% {
+    box-shadow: 0 0 0 7px rgba(110, 155, 212, 0);
+  }
+}
+
+/* ── Entrance, once ───────────────────────────────────────────────────────── */
+
+.a-logo {
+  animation:
+    markIn 0.8s var(--ease-out-soft) both,
+    floatY 6.5s ease-in-out 1s infinite;
+}
+
+.a-tagline {
+  animation: riseIn 0.6s var(--ease-out-soft) 0.26s both;
+}
+
+.a-rule {
+  animation: ruleGrow 0.7s var(--ease-out-soft) 0.34s both;
+}
+.a-rule-left {
+  transform-origin: right center;
+}
+.a-rule-right {
+  transform-origin: left center;
+}
+
+.a-row {
+  animation: rowIn 0.62s var(--ease-out-soft) both;
+}
+.a-row-1 {
+  animation-delay: 0.42s;
+}
+.a-row-2 {
+  animation-delay: 0.52s;
+}
+.a-row-3 {
+  animation-delay: 0.62s;
+}
+
+.a-qr {
+  animation: rowIn 0.7s var(--ease-out-soft) 0.76s both;
+}
+
+.a-footer {
+  animation: fadeIn 0.9s ease 0.95s both;
+}
+
+/* ── Ambient loops ────────────────────────────────────────────────────────── */
+
+.a-chevron {
+  animation: nudgeX 2.8s ease-in-out 1.4s infinite;
+}
+.a-chevron-accent {
+  animation-delay: 1.6s;
+}
+
+.a-tile {
+  animation: tileBreathe 3.6s ease-in-out 1.2s infinite;
+}
+
+.a-qr-tile {
+  animation: qrPulse 3.4s ease-out 1.6s infinite;
+}
+
+.a-halo {
+  animation: haloDrift 17s ease-in-out infinite;
+}
+
+/* Light sweep across the cards. */
+.sheen {
+  position: relative;
+  overflow: hidden;
+}
+
+.sheen::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+.sheen-light::before {
+  width: 32%;
+  background: linear-gradient(
+    100deg,
+    rgba(123, 167, 220, 0),
+    rgba(123, 167, 220, 0.22) 50%,
+    rgba(123, 167, 220, 0)
+  );
+  animation: cardSheen 6.5s var(--ease-sheen) 2.2s infinite;
+}
+
+.sheen-accent::before {
+  width: 38%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.34) 50%, transparent);
+  animation: sheen 5.6s var(--ease-sheen) 1.5s infinite;
+}
+
+/*
+ * The source design sets the tagline and footnote in Glancyr, which is a
+ * licensed face and is not bundled here — those lines fall back to Instrument
+ * Sans. To restore it, drop the .otf files into `public/fonts/` and uncomment:
+ *
+ *   @font-face { font-family: 'Glancyr'; src: url('/fonts/Glancyr-Regular.otf') format('opentype'); font-weight: 400; font-display: swap; }
+ *   @font-face { font-family: 'Glancyr'; src: url('/fonts/Glancyr-Medium.otf')  format('opentype'); font-weight: 500; font-display: swap; }
+ */
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+  }
+}
